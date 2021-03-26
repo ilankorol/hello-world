@@ -10,4 +10,5 @@ public abstract class AMazeGenerator implements IMazeGenerator {
         long after=System.currentTimeMillis();
         return (long)after-before;
     }
+    public abstract Maze generate(int rows, int columns);
 }
