@@ -1,6 +1,5 @@
 package algorithms.mazeGenerators;
-
-import java.util.Stack;
+import java.util.*;
 
 public class Maze {
     private int rows;
@@ -35,6 +34,7 @@ public class Maze {
 
     private Position Start;
     private Position End;
+
     public void setRows(int rows) {
         this.rows = rows;
     }
@@ -50,14 +50,42 @@ public class Maze {
     public int getColumns() {
         return columns;
     }
-    public void setCell(int row,int column,int val)
-    {
-        if(row>=0&column>=0&row<rows&column<columns&(val==0|val==1))
-        {
-            Walls[row][column]=val;
+
+    public void setCell(int row, int column, int val) {
+        if (row >= 0 & column >= 0 & row < rows & column < columns & (val == 0 | val == 1)) {
+            Walls[row][column] = val;
         }
     }
-    public Stack<Position> GetAvailableNeighbors(Position p){
-        return null;//need to write it down
+
+    public Stack<Position> GetAvailableNeighbors(Maze m, Position p) {
+        if (p == null)
+            return null;
+        Stack<Position> k = new Stack<>();
+        if (p.getColumnIndex() - 1 >= 0) {
+            if (m[p.getRowIndex()+1][p.getColumnIndex() - 1] == 1 && m[p.getRowIndex() - 1][p.getColumnIndex()-1] == 1 && m[p.getRowIndex()][p.getColumnIndex()-2] == 1 && p.getColumnIndex()-2>=0 && p.getRowIndex()-1>=0 && p.getRowIndex()+1<m.rows) {
+                Position pos = new Position(p.getRowIndex(), p.getColumnIndex() - 1);
+                k.push(pos);
+            }
+        }
+        if (p.getRowIndex() - 1 >= 0) {
+            if (m[p.getRowIndex()-1][p.getColumnIndex() - 1] == 1 && m[p.getRowIndex() - 1][p.getColumnIndex()+1] == 1 && m[p.getRowIndex()-2][p.getColumnIndex()] == 1 && p.getColumnIndex()-1>=0 && p.getColumnIndex()+1>=m.columns && p.getRowIndex()-2>=0) {
+                Position pos = new Position(p.getRowIndex()-1, p.getColumnIndex() );
+                k.push(pos);
+            }
+            }
+        if (p.getRowIndex() + 1 <m.rows) {
+            if (m[p.getRowIndex()+1][p.getColumnIndex() - 1] == 1 && m[p.getRowIndex() + 1][p.getColumnIndex()+1] == 1 && m[p.getRowIndex()+2][p.getColumnIndex()] == 1 && p.getColumnIndex()-1>=0 && p.getColumnIndex()+1>=m.columns && p.getRowIndex()+2<m.rows) {
+                Position pos = new Position(p.getRowIndex()+1, p.getColumnIndex() );
+                k.push(pos);
+            }
+        }
+        if (p.getColumnIndex() + 1 <m.columns) {
+            if (m[p.getRowIndex()+1][p.getColumnIndex() + 1] == 1 && m[p.getRowIndex() - 1][p.getColumnIndex()+1] == 1 && m[p.getRowIndex()][p.getColumnIndex()+2] == 1 && p.getColumnIndex()+2<m.columns && p.getRowIndex()-1>=0 && p.getRowIndex()+1<m.rows) {
+                Position pos = new Position(p.getRowIndex(), p.getColumnIndex() - 1);
+                k.push(pos);
+            }
+        }
+        return k;
+        }
     }
-}
+
