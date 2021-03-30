@@ -57,4 +57,34 @@ public class Maze {
             Walls[row][column]=val;
         }
     }
+    public void print()
+    {
+        boolean StartRedColor=false;
+        boolean EndGreenColor=false;
+        for(int currRow=0;currRow<getRows();currRow++)
+        {
+            if(currRow!=0)
+                System.out.println("}"+",");
+            System.out.print("{");
+            for (int currCol=0;currCol<getColumns();currCol++)
+            {
+                StartRedColor=false;
+                EndGreenColor=false;
+                if(getStart().getRowIndex()==currRow & getStart().getColumnIndex()==currCol)
+                    StartRedColor=true;
+                if(getEnd().getRowIndex()==currRow & getEnd().getColumnIndex()==currCol)
+                    EndGreenColor=true;
+                if(StartRedColor)
+                    System.out.print("\033[0;31m");
+                if(EndGreenColor)
+                    System.out.print("\033[0;32m");
+                System.out.print(getWalls()[currRow][currCol]);
+                if(StartRedColor||EndGreenColor)
+                    System.out.print("\033[0m");
+                if(currCol!=columns-1)
+                    System.out.print(",");
+            }
+        }
+        System.out.println("}"+",");
+    }
 }
