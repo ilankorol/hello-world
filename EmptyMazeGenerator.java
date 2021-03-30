@@ -3,8 +3,7 @@ package algorithms.mazeGenerators;
 public class EmptyMazeGenerator extends AMazeGenerator {
     public EmptyMazeGenerator() {
     }
-    @Override
-    public Maze generate(int rows, int columns) {
+    public static Maze generate1(int rows, int columns) {
         if(rows<1|columns<1)
             return null;
         Maze m=new Maze();
@@ -13,10 +12,22 @@ public class EmptyMazeGenerator extends AMazeGenerator {
         int[][] map=new int[rows][columns];
         for(int i=0;i<rows;i++) {
             for (int j = 0; j < columns; j++) {
-                map[i][j] = 0;
+                map[i][j] = 1;
             }
         }
         m.setWalls(map);
+        return m;
+    }
+    @Override
+    public Maze generate(int rows, int columns) {
+        if(rows<1|columns<1)
+            return null;
+        Maze m=EmptyMazeGenerator.generate1(rows,columns);
+        for(int i=0;i<rows;i++) {
+            for (int j = 0; j < columns; j++) {
+                m.setCell(i,j,0);
+            }
+        }
         return m;
     }
 }
