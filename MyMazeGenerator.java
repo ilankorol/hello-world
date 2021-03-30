@@ -149,11 +149,17 @@ public class MyMazeGenerator extends AMazeGenerator{
         m.setEnd(null);
         while (m.getEnd()==null)
         {
+            randRow=(int)Math.floor(Math.random() * rows);
+            randCol=(int)Math.floor(Math.random() * columns);
             int halfRowsAndCols=(m.getRows()+m.getColumns())/2;//for making interesting mazes
             Position pos = new Position(randRow, randCol);
-            if(randRow+randCol>=halfRowsAndCols & m.getWalls()[randCol][randRow]==0)
-                m.setEnd(pos);
+            if(randRow+randCol>=halfRowsAndCols)
+            {
+                if(m.getWalls()[randRow][randCol]==0)
+                    m.setEnd(pos);
+            }
         }
+        m.setCell(0,0,0);
         return m;
     }
 }
