@@ -1,7 +1,5 @@
 package algorithms.mazeGenerators;
 
-import java.util.Stack;
-
 public class Maze {
     private int rows;
     private int columns;
@@ -25,11 +23,11 @@ public class Maze {
         End = end;
     }
 
-    public Position getStart() {
+    public Position getStartPosition() {
         return Start;
     }
 
-    public Position getEnd() {
+    public Position getGoalPosition() {
         return End;
     }
 
@@ -70,15 +68,16 @@ public class Maze {
             {
                 StartRedColor=false;
                 EndGreenColor=false;
-                if(getStart().getRowIndex()==currRow & getStart().getColumnIndex()==currCol)
+                if(getStartPosition().getRowIndex()==currRow & getStartPosition().getColumnIndex()==currCol)
                     StartRedColor=true;
-                if(getEnd().getRowIndex()==currRow & getEnd().getColumnIndex()==currCol)
+                if(getGoalPosition().getRowIndex()==currRow & getGoalPosition().getColumnIndex()==currCol)
                     EndGreenColor=true;
                 if(StartRedColor)
-                    System.out.print("\033[0;31m");
+                    System.out.print("\033[0;31m"+"S");
                 if(EndGreenColor)
-                    System.out.print("\033[0;32m");
-                System.out.print(getWalls()[currRow][currCol]);
+                    System.out.print("\033[0;32m"+"E");
+                if(!StartRedColor&&!EndGreenColor)
+                    System.out.print(getWalls()[currRow][currCol]);
                 if(StartRedColor||EndGreenColor)
                     System.out.print("\033[0m");
                 if(currCol!=columns-1)
