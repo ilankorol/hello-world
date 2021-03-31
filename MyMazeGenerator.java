@@ -2,8 +2,8 @@ package algorithms.mazeGenerators;
 
 import java.util.Stack;
 
-public class MyMazeGenerator extends AMazeGenerator{
-    public static boolean CheckUpNeighbor(Maze m,Position p)
+public class MyMazeGenerator extends AMazeGenerator {
+    public static boolean CheckUpNeighbor(Maze m, Position p)
     {
         boolean upValid=false;
         int row=p.getRowIndex();
@@ -117,7 +117,7 @@ public class MyMazeGenerator extends AMazeGenerator{
     public Maze generate(int rows, int columns) {
         if(rows<1|columns<1)
             return null;
-        Maze m=EmptyMazeGenerator.generate1(rows,columns);
+        Maze m= EmptyMazeGenerator.generate1(rows,columns);
         Stack<Position> Pathstk= new Stack<>();
         m.setStart(new Position(0,0));
         Pathstk.push(new Position(0,0));
@@ -147,7 +147,7 @@ public class MyMazeGenerator extends AMazeGenerator{
         int randRow=(int)Math.floor(Math.random() * rows);
         int randCol=(int)Math.floor(Math.random() * columns);
         m.setEnd(null);
-        while (m.getEnd()==null)
+        while (m.getGoalPosition()==null)
         {
             randRow=(int)Math.floor(Math.random() * rows);
             randCol=(int)Math.floor(Math.random() * columns);
