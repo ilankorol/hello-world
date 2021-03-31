@@ -28,6 +28,15 @@ public class EmptyMazeGenerator extends AMazeGenerator {
                 m.setCell(i,j,0);
             }
         }
+        int randRow=(int)Math.floor(Math.random() * rows);
+        int randCol=(int)Math.floor(Math.random() * columns);
+        while(randRow==0&&randCol==0)
+        {
+            randRow=(int)Math.floor(Math.random() * rows);
+            randCol=(int)Math.floor(Math.random() * columns);
+        }
+        m.setStart(new Position(0,0));
+        m.setEnd(new Position(randRow,randCol));
         return m;
     }
 }
