@@ -151,7 +151,7 @@ public class MyMazeGenerator extends AMazeGenerator {
         {
             randRow=(int)Math.floor(Math.random() * rows);
             randCol=(int)Math.floor(Math.random() * columns);
-            int halfRowsAndCols=(m.getRows()+m.getColumns())/2;//for making interesting mazes
+            int halfRowsAndCols=((m.getRows()+m.getColumns())/2)-1;//for making interesting mazes
             Position pos = new Position(randRow, randCol);
             if(randRow+randCol>=halfRowsAndCols)
             {
