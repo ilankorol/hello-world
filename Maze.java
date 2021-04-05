@@ -62,8 +62,8 @@ public class Maze {
         for(int currRow=0;currRow<getRows();currRow++)
         {
             if(currRow!=0)
-                System.out.println("}"+",");
-            System.out.print("{");
+                System.out.println(" }");
+            System.out.print("{ ");
             for (int currCol=0;currCol<getColumns();currCol++)
             {
                 StartRedColor=false;
@@ -81,9 +81,9 @@ public class Maze {
                 if(StartRedColor||EndGreenColor)
                     System.out.print("\033[0m");
                 if(currCol!=columns-1)
-                    System.out.print(",");
+                    System.out.print(" ");
             }
         }
-        System.out.println("}"+",");
+        System.out.println(" }");
     }
 }
