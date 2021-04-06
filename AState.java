@@ -1,11 +1,11 @@
 package algorithms.search;
 
-public class AState {
-    AState StartState;
+public abstract class AState implements Comparable<AState> {
+    AState PreviousState;
     Node node;
     int cost;
-    public AState getStartState() {
-        return StartState;
+    public AState getPreviousState() {
+        return PreviousState;
     }
 
     public Node getNode() {
@@ -16,14 +16,14 @@ public class AState {
         return cost;
     }
 
-    public AState(AState startState, Node node, int cost) {
-        StartState = startState;
+    public AState(AState previousState, Node node, int cost) {
+        PreviousState = previousState;
         this.node = node;
         this.cost = cost;
     }
 
-    public void setStartState(AState startState) {
-        StartState = startState;
+    public void setPreviousState(AState previousState) {
+        this.PreviousState = previousState;
     }
 
     public void setNode(Node node) {
@@ -33,4 +33,11 @@ public class AState {
     public void setCost(int cost) {
         this.cost = cost;
     }
+    //public abstract int compare(AState a);
+    @Override
+    public abstract int compareTo(AState o);
+    @Override
+    public abstract String toString();
+
+
 }
