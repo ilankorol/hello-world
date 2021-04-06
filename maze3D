@@ -1,0 +1,97 @@
+package maze3D;
+
+public class Maze3D {
+    private int depth;
+    private int row;
+    private int column;
+    private int[][][] Walls;
+    private Position3D start;
+    private Position3D end;
+    public void setWalls(int[][][] walls) {
+        Walls = walls;
+    }
+
+    public int[][][] getWalls() {
+        return Walls;
+    }
+
+    public void setStart(Position3D start) {
+        Start = start;
+    }
+
+    public void setEnd(Position3D end) {
+        End = end;
+    }
+
+    public Position3D getStartPosition() {
+        return Start;
+    }
+
+    public Position3D getGoalPosition() {
+        return End;
+    }
+
+    private Position3D Start;
+    private Position3D End;
+
+    public void setRow(int rows) {
+        this.row = rows;
+    }
+
+    public void setColumn(int columns) {
+        this.column = columns;
+    }
+
+    public void setDepth(int depth) {
+        this.depth = depth;
+    }
+    public int getRows() {
+        return row;
+    }
+
+    public int getColumns() {
+        return column;
+    }
+    public int getDepth() {
+        return depth;
+    }
+
+    public void setCell(int depth,int row,int column,int val)
+    {
+        if(row>=0&column>=0&depth>=0&row<row&column<column&depth<depth&(val==0|val==1))
+        {
+            Walls[depth][row][column]=val;
+        }
+    }
+    public void print()
+    {
+        boolean StartRedColor=false;
+        boolean EndGreenColor=false;
+        for (int i =0; i<getDepth();i++) {
+            for (int currRow = 0; currRow < getRows(); currRow++) {
+                if (currRow != 0)
+                    System.out.println(" }");
+                System.out.print("{ ");
+                for (int currCol = 0; currCol < getColumns(); currCol++) {
+                    StartRedColor = false;
+                    EndGreenColor = false;
+                    if (getStartPosition().getRowIndex() == currRow & getStartPosition().getColumnIndex() == currCol)
+                        StartRedColor = true;
+                    if (getGoalPosition().getRowIndex() == currRow & getGoalPosition().getColumnIndex() == currCol)
+                        EndGreenColor = true;
+                    if (StartRedColor)
+                        System.out.print("\033[0;31m" + "S");
+                    if (EndGreenColor)
+                        System.out.print("\033[0;32m" + "E");
+                    if (!StartRedColor && !EndGreenColor)
+                        System.out.print(getWalls()[currRow][currCol]);
+                    if (StartRedColor || EndGreenColor)
+                        System.out.print("\033[0m");
+                    if (currCol != column - 1)
+                        System.out.print(" ");
+                }
+            }
+        }
+        System.out.println(" }");
+    }
+}
