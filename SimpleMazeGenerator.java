@@ -20,13 +20,23 @@ public class SimpleMazeGenerator extends AMazeGenerator {
             randRow=(int)Math.floor(Math.random() * rows);
             randCol=(int)Math.floor(Math.random() * columns);
         }
-        for(int col=0;col<=randCol;col++)
-        {
-            m.setCell(0,col,0);
-        }
-        for(int row=0;row<=randRow;row++)
-        {
-            m.setCell(row,randCol,0);
+        int RightOrDown=0;
+        int col=0;
+        int row=0;
+        boolean Arrived=false;
+        while((row<=randRow||col<=randCol) && (!Arrived)) {
+            RightOrDown = (int) Math.floor(Math.random() * 2);
+            if (row == randRow)
+                RightOrDown = 0;
+            if (col == randCol)
+                RightOrDown = 1;
+            if (RightOrDown == 0)
+                col++;
+            if (RightOrDown == 1)
+                row++;
+            m.setCell(row, col, 0);
+            if (row == randRow && col == randCol)
+                Arrived = true;
         }
         m.setEnd(new Position(randRow,randCol));
         return m;
