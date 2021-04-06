@@ -1,0 +1,224 @@
+package maze3D;
+import java.util.Stack;
+public class MyMaze3DGenerator extends  AMaze3DGenerator{
+        public static boolean CheckInNeighbor(Maze3D m, Position3D p)
+        {
+            boolean inValid=false;
+            int row=p.getRowIndex();
+            int col=p.getColumnIndex();
+            int dep = p.getDepthIndex();
+            if (dep + 1 < m.getDepth()) {
+                inValid=true;
+                if(row-1>=0)
+                    if(m.getWalls()[dep+1][row-1][col]==0) {
+                        inValid = false;
+                    }
+                if(col-1>=0)
+                    if(m.getWalls()[dep+1][row][col-1]==0) {
+                        inValid = false;
+                    }
+                if(col+1<m.getColumns())
+                    if(m.getWalls()[dep+1][row][col+1]==0) {
+                        inValid = false;
+                    }
+                if(row+1<m.getRows())
+                    if(m.getWalls()[dep+1][row+1][col]==0) {
+                        inValid = false;
+                    }
+                if(dep+2<m.getDepth())
+                    if(m.getWalls()[dep+2][row][col]==0) {
+                        inValid = false;
+                    }
+            }
+            return inValid;
+        }
+        public static boolean CheckOutNeighbor(Maze3D m, Position3D p)
+        {
+            boolean outValid=false;
+            int row=p.getRowIndex();
+            int col=p.getColumnIndex();
+            int dep = p.getDepthIndex();
+            if (dep -1 >= 0) {
+                outValid=true;
+                if(row-1>=0)
+                    if(m.getWalls()[dep-1][row-1][col]==0) {
+                        outValid = false;
+                    }
+                if(col-1>=0)
+                    if(m.getWalls()[dep-1][row][col-1]==0) {
+                        outValid = false;
+                    }
+                if(col+1<m.getColumns())
+                    if(m.getWalls()[dep-1][row][col+1]==0) {
+                        outValid = false;
+                    }
+                if(row+1<m.getRows())
+                    if(m.getWalls()[dep-1][row+1][col]==0) {
+                        outValid = false;
+                    }
+                if(dep-2>0)
+                    if(m.getWalls()[dep-2][row][col]==0) {
+                        outValid = false;
+                    }
+            }
+            return outValid;
+        }
+        public static boolean CheckUpNeighbor(Maze3D m, Position3D p)
+        {
+            boolean upValid=false;
+            int row=p.getRowIndex();
+            int col=p.getColumnIndex();
+            int dep = p.getDepthIndex();
+            if (row - 1 >= 0) {
+                upValid=true;
+                if(row-2>=0)
+                    if(m.getWalls()[dep][row-2][col]==0) {
+                        upValid = false;
+                    }
+                if(col-1>=0)
+                    if(m.getWalls()[dep][row-1][col-1]==0) {
+                        upValid = false;
+                    }
+                if(col+1<m.getColumns())
+                    if(m.getWalls()[dep][row-1][col+1]==0) {
+                        upValid = false;
+                    }
+                if(dep+1<m.getDepth())
+                    if(m.getWalls()[dep+1][row-1][col]==0) {
+                        upValid = false;
+                    }
+                if(dep-1>0)
+                    if(m.getWalls()[dep-1][row-1][col]==0) {
+                        upValid = false;
+                    }
+            }
+            return upValid;
+        }
+        public static boolean CheckDownNeighbor(Maze3D m, Position3D p)
+        {
+            boolean downValid=false;
+            int row=p.getRowIndex();
+            int col=p.getColumnIndex();
+            int dep = p.getDepthIndex();
+            if (row + 1 < m.getRows()) {
+                downValid=true;
+                if(row+2<m.getRows())
+                    if(m.getWalls()[dep][row+2][col]==0) {
+                        downValid = false;
+                    }
+                if(col-1>=0)
+                    if(m.getWalls()[dep][row+1][col-1]==0) {
+                        downValid = false;
+                    }
+                if(col+1<m.getColumns())
+                    if(m.getWalls()[dep][row+1][col+1]==0) {
+                        downValid = false;
+                    }
+                if(dep+1<m.getDepth())
+                    if(m.getWalls()[dep+1][row+1][col]==0) {
+                        downValid = false;
+                    }
+                if(dep-1>0)
+                    if(m.getWalls()[dep-1][row+1][col]==0) {
+                        downValid = false;
+                    }
+            }
+            return downValid;
+        }
+        public static boolean CheckLeftNeighbor(Maze3D m, Position3D p)
+        {
+            boolean leftValid=false;
+            int row=p.getRowIndex();
+            int col=p.getColumnIndex();
+            int dep = p.getDepthIndex();
+            if (col - 1 >= 0) {
+                leftValid=true;
+                if(col-2>=0)
+                    if(m.getWalls()[dep][row][col-2]==0) {
+                        leftValid = false;
+                    }
+                if(row-1>=0)
+                    if(m.getWalls()[dep][row-1][col-1]==0) {
+                        leftValid = false;
+                    }
+                if(row+1<m.getRows())
+                    if(m.getWalls()[dep][row+1][col-1]==0) {
+                        leftValid = false;
+                    }
+                if(dep+1<m.getDepth())
+                    if(m.getWalls()[dep+1][row][col-1]==0) {
+                        leftValid = false;
+                    }
+                if(dep-1>0)
+                    if(m.getWalls()[dep-1][row][col-1]==0) {
+                        leftValid = false;
+                    }
+            }
+            return leftValid;
+        }
+        public static boolean CheckRightNeighbor(Maze3D m, Position3D p)
+        {
+            boolean rightValid=false;
+            int row=p.getRowIndex();
+            int col=p.getColumnIndex();
+            int dep = p.getDepthIndex();
+            if (col + 1 < m.getColumns()) {
+                rightValid=true;
+                if(col+2 < m.getColumns())
+                    if(m.getWalls()[dep][row][col+2]==0) {
+                        rightValid = false;
+                    }
+                if(row-1>=0)
+                    if(m.getWalls()[dep][row-1][col+1]==0) {
+                        rightValid = false;
+                    }
+                if(row+1<m.getRows())
+                    if(m.getWalls()[dep][row+1][col+1]==0) {
+                        rightValid = false;
+                    }
+                if(dep+1<m.getDepth())
+                    if(m.getWalls()[dep+1][row][col+1]==0) {
+                        rightValid = false;
+                    }
+                if(dep-1>0)
+                    if(m.getWalls()[dep-1][row][col+1]==0) {
+                        rightValid = false;
+                    }
+            }
+            return rightValid;
+        }
+        public static Stack<Position3D> GetAvailableNeighbors(Maze3D m, Position3D p) {
+            if (p == null)
+                return null;
+            Stack<Position3D> k = new Stack<>();
+            if (MyMaze3DGenerator.CheckUpNeighbor(m, p)) {
+                Position3D pos = new Position3D(p.getDepthIndex(),p.getRowIndex() - 1, p.getColumnIndex());
+                k.push(pos);
+            }
+            if (MyMaze3DGenerator.CheckDownNeighbor(m, p)) {
+                Position3D pos = new Position3D(p.getDepthIndex(),p.getRowIndex() + 1, p.getColumnIndex());
+                k.push(pos);
+            }
+            if (MyMaze3DGenerator.CheckLeftNeighbor(m, p)) {
+                Position3D pos = new Position3D(p.getDepthIndex(),p.getRowIndex(), p.getColumnIndex() - 1);
+                k.push(pos);
+            }
+            if (MyMaze3DGenerator.CheckRightNeighbor(m, p)) {
+                Position3D pos = new Position3D(p.getDepthIndex(),p.getRowIndex(), p.getColumnIndex() + 1);
+                k.push(pos);
+            }
+            if (MyMaze3DGenerator.CheckInNeighbor(m, p)) {
+                Position3D pos = new Position3D(p.getDepthIndex()+1,p.getRowIndex(), p.getColumnIndex());
+                k.push(pos);
+            }
+            if (MyMaze3DGenerator.CheckOutNeighbor(m, p)) {
+                Position3D pos = new Position3D(p.getDepthIndex()-1,p.getRowIndex(), p.getColumnIndex() + 1);
+                k.push(pos);
+            }
+            return k;
+        }
+    public Maze3D generate(int depth, int row, int column){
+        }
+    }
+
+}
