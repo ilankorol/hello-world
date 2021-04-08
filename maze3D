@@ -75,16 +75,16 @@ public class Maze3D {
                 for (int currCol = 0; currCol < getColumns(); currCol++) {
                     StartRedColor = false;
                     EndGreenColor = false;
-                    if (getStartPosition().getRowIndex() == currRow & getStartPosition().getColumnIndex() == currCol)
+                    if (getStartPosition().getDepthIndex()==i & getStartPosition().getRowIndex() == currRow & getStartPosition().getColumnIndex() == currCol)
                         StartRedColor = true;
-                    if (getGoalPosition().getRowIndex() == currRow & getGoalPosition().getColumnIndex() == currCol)
+                    if (getGoalPosition().getDepthIndex()==i &getGoalPosition().getRowIndex() == currRow & getGoalPosition().getColumnIndex() == currCol)
                         EndGreenColor = true;
                     if (StartRedColor)
                         System.out.print("\033[0;31m" + "S");
                     if (EndGreenColor)
                         System.out.print("\033[0;32m" + "E");
                     if (!StartRedColor && !EndGreenColor)
-                        System.out.print(getWalls()[currRow][currCol]);
+                        System.out.print(getWalls()[i][currRow][currCol]);
                     if (StartRedColor || EndGreenColor)
                         System.out.print("\033[0m");
                     if (currCol != column - 1)
