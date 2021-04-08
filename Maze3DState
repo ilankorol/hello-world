@@ -1,0 +1,23 @@
+package maze3D;
+
+import algorithms.search.AState;
+import algorithms.;
+
+
+public class Maze3DState extends AState {
+    public MazeState(AState previousState, algorithms.search.Node node, int cost) {
+        super(previousState, node, cost);
+    }
+
+    @Override
+    public int compareTo(AState o) {
+        if(((Position3D)this.node.getData()).getRowIndex()==((Position3D)o.node.getData()).getRowIndex()&&
+                ((Position3D)this.node.getData()).getColumnIndex()==((Position3D)o.node.getData()).getColumnIndex())
+            return 0;
+        return -1;
+    }
+
+    @Override
+    public String toString() {return node.getData().toString();}
+
+}
