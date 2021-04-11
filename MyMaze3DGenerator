@@ -1,4 +1,4 @@
-package maze3D;
+package algorithms.maze3D;
 import algorithms.mazeGenerators.Maze;
 
 import java.util.Stack;
@@ -11,24 +11,39 @@ public class MyMaze3DGenerator extends  AMaze3DGenerator{
             int dep = p.getDepthIndex();
             if (dep + 1 < m.getDepth()) {
                 inValid=true;
-                if(row-1>=0)
-                    if(m.getWalls()[dep+1][row-1][col]==0) {
+                if(row-1>=0){
+                //    inValid = false;
+                 //   return inValid;
+              //  }
+                    if(m.getWalls()[dep+1][row-1][col]==0)// {
                         inValid = false;
                     }
-                if(col-1>=0)
-                    if(m.getWalls()[dep+1][row][col-1]==0) {
+                if(col-1>=0){
+                //    inValid = false;
+                 //   return inValid;
+                //}
+                    if(m.getWalls()[dep+1][row][col-1]==0)// {
                         inValid = false;
                     }
-                if(col+1<m.getColumns())
-                    if(m.getWalls()[dep+1][row][col+1]==0) {
+                if(col+1<m.getColumns()){
+                  //  inValid = false;
+                  //  return inValid;
+                //}
+                    if(m.getWalls()[dep+1][row][col+1]==0) //{
                         inValid = false;
                     }
-                if(row+1<m.getRows())
-                    if(m.getWalls()[dep+1][row+1][col]==0) {
+                if(row+1<m.getRows()){
+                  //  inValid = false;
+                  //  return inValid;
+               // }
+                    if(m.getWalls()[dep+1][row+1][col]==0) //{
                         inValid = false;
                     }
-                if(dep+2<m.getDepth())
-                    if(m.getWalls()[dep+2][row][col]==0) {
+                if(dep+2<m.getDepth()){
+                 //   inValid = false;
+                 //   return inValid;
+             //   }
+                    if(m.getWalls()[dep+2][row][col]==0)// {
                         inValid = false;
                     }
             }
@@ -42,24 +57,39 @@ public class MyMaze3DGenerator extends  AMaze3DGenerator{
             int dep = p.getDepthIndex();
             if (dep -1 >= 0) {
                 outValid=true;
-                if(row-1>=0)
-                    if(m.getWalls()[dep-1][row-1][col]==0) {
+                if(row-1>=0){
+                  //  outValid = false;
+                  //  return outValid;
+             //   }
+                    if(m.getWalls()[dep-1][row-1][col]==0) //{
                         outValid = false;
                     }
-                if(col-1>=0)
-                    if(m.getWalls()[dep-1][row][col-1]==0) {
+                if(col-1>=0){
+                 //   outValid = false;
+                 //   return outValid;
+                //}
+                    if(m.getWalls()[dep-1][row][col-1]==0)// {
                         outValid = false;
                     }
-                if(col+1<m.getColumns())
-                    if(m.getWalls()[dep-1][row][col+1]==0) {
+                if(col+1<m.getColumns()){
+                  //  outValid = false;
+                  //  return outValid;
+               // }
+                    if(m.getWalls()[dep-1][row][col+1]==0) //{
                         outValid = false;
                     }
-                if(row+1<m.getRows())
-                    if(m.getWalls()[dep-1][row+1][col]==0) {
+                if(row+1<m.getRows()){
+                 //   outValid = false;
+                  //  return outValid;
+               // }
+                    if(m.getWalls()[dep-1][row+1][col]==0)// {
                         outValid = false;
                     }
-                if(dep-2>0)
-                    if(m.getWalls()[dep-2][row][col]==0) {
+                if(dep-2>=0){
+                  //  outValid = false;
+                  //  return outValid;
+               // }
+                    if(m.getWalls()[dep-2][row][col]==0) //{
                         outValid = false;
                     }
             }
@@ -73,24 +103,39 @@ public class MyMaze3DGenerator extends  AMaze3DGenerator{
             int dep = p.getDepthIndex();
             if (row - 1 >= 0) {
                 upValid=true;
-                if(row-2>=0)
-                    if(m.getWalls()[dep][row-2][col]==0) {
+                if(row-2>=0){
+                  //  upValid = false;
+                  //  return upValid;
+               // }
+                    if(m.getWalls()[dep][row-2][col]==0) //{
                         upValid = false;
                     }
-                if(col-1>=0)
-                    if(m.getWalls()[dep][row-1][col-1]==0) {
+                if(col-1>=0){
+                 //   upValid = false;
+                 //   return upValid;
+                //}
+                    if(m.getWalls()[dep][row-1][col-1]==0) //{
                         upValid = false;
                     }
-                if(col+1<m.getColumns())
-                    if(m.getWalls()[dep][row-1][col+1]==0) {
+                if(col+1<m.getColumns()){
+                 //   upValid = false;
+                 //   return upValid;
+               // }
+                    if(m.getWalls()[dep][row-1][col+1]==0) //{
                         upValid = false;
                     }
-                if(dep+1<m.getDepth())
-                    if(m.getWalls()[dep+1][row-1][col]==0) {
+                if(dep+1<m.getDepth()){
+                //    upValid = false;
+                 //   return upValid;
+                //}
+                    if(m.getWalls()[dep+1][row-1][col]==0) //{
                         upValid = false;
                     }
-                if(dep-1>0)
-                    if(m.getWalls()[dep-1][row-1][col]==0) {
+                if(dep-1>=0){
+                 //   upValid = false;
+                  //  return upValid;
+               // }
+                    if(m.getWalls()[dep-1][row-1][col]==0)// {
                         upValid = false;
                     }
             }
@@ -104,24 +149,40 @@ public class MyMaze3DGenerator extends  AMaze3DGenerator{
             int dep = p.getDepthIndex();
             if (row + 1 < m.getRows()) {
                 downValid=true;
-                if(row+2<m.getRows())
-                    if(m.getWalls()[dep][row+2][col]==0) {
+                if(row+2<m.getRows()){
+                 //   downValid=false;
+                  //  return downValid;
+                //}
+                    if(m.getWalls()[dep][row+2][col]==0)// {
                         downValid = false;
                     }
-                if(col-1>=0)
-                    if(m.getWalls()[dep][row+1][col-1]==0) {
+                if(col-1>=0){
+                 //   downValid=false;
+                 //   return downValid;
+              //  }
+                    if(m.getWalls()[dep][row+1][col-1]==0) //{
                         downValid = false;
                     }
-                if(col+1<m.getColumns())
-                    if(m.getWalls()[dep][row+1][col+1]==0) {
+                if(col+1<m.getColumns()){
+                 //   downValid=false;
+                 //   return downValid;
+               // }
+                    if(m.getWalls()[dep][row+1][col+1]==0) //{
                         downValid = false;
                     }
-                if(dep+1<m.getDepth())
-                    if(m.getWalls()[dep+1][row+1][col]==0) {
+                if(dep+1<m.getDepth()){
+                   // downValid=false;
+                   // return downValid;
+               // }
+                    if(m.getWalls()[dep+1][row+1][col]==0)// {
                         downValid = false;
                     }
-                if(dep-1>0)
-                    if(m.getWalls()[dep-1][row+1][col]==0) {
+                if(dep-1>=0)
+                {
+                  //  downValid=false;
+                  //  return downValid;
+                //}
+                    if(m.getWalls()[dep-1][row+1][col]==0)// {
                         downValid = false;
                     }
             }
@@ -135,24 +196,39 @@ public class MyMaze3DGenerator extends  AMaze3DGenerator{
             int dep = p.getDepthIndex();
             if (col - 1 >= 0) {
                 leftValid=true;
-                if(col-2>=0)
-                    if(m.getWalls()[dep][row][col-2]==0) {
+                if(col-2>=0){
+                   // leftValid = false;
+                  //  return leftValid;
+                //}
+                    if(m.getWalls()[dep][row][col-2]==0) //{
                         leftValid = false;
                     }
-                if(row-1>=0)
-                    if(m.getWalls()[dep][row-1][col-1]==0) {
+                if(row-1>=0){
+                  //  leftValid = false;
+                  //  return leftValid;
+               // }
+                    if(m.getWalls()[dep][row-1][col-1]==0)// {
                         leftValid = false;
                     }
-                if(row+1<m.getRows())
-                    if(m.getWalls()[dep][row+1][col-1]==0) {
+                if(row+1<m.getRows()){
+                  //  leftValid = false;
+                 //   return leftValid;
+                //}
+                    if(m.getWalls()[dep][row+1][col-1]==0) //{
                         leftValid = false;
                     }
-                if(dep+1<m.getDepth())
-                    if(m.getWalls()[dep+1][row][col-1]==0) {
+                if(dep+1<m.getDepth()){
+                  //  leftValid = false;
+                  //  return leftValid;
+                //}
+                    if(m.getWalls()[dep+1][row][col-1]==0) //{
                         leftValid = false;
                     }
-                if(dep-1>0)
-                    if(m.getWalls()[dep-1][row][col-1]==0) {
+                if(dep-1>=0){
+                  //  leftValid = false;
+                  //  return leftValid;
+              //  }
+                    if(m.getWalls()[dep-1][row][col-1]==0)// {
                         leftValid = false;
                     }
             }
@@ -166,24 +242,39 @@ public class MyMaze3DGenerator extends  AMaze3DGenerator{
             int dep = p.getDepthIndex();
             if (col + 1 < m.getColumns()) {
                 rightValid=true;
-                if(col+2 < m.getColumns())
-                    if(m.getWalls()[dep][row][col+2]==0) {
+                if(col+2 < m.getColumns()){
+                  //  rightValid = false;
+                  //  return rightValid;
+               // }
+                    if(m.getWalls()[dep][row][col+2]==0)// {
                         rightValid = false;
                     }
-                if(row-1>=0)
-                    if(m.getWalls()[dep][row-1][col+1]==0) {
+                if(row-1>=0){
+                   // rightValid = false;
+                  //  return rightValid;
+               // }
+                    if(m.getWalls()[dep][row-1][col+1]==0) //{
                         rightValid = false;
                     }
-                if(row+1<m.getRows())
-                    if(m.getWalls()[dep][row+1][col+1]==0) {
+                if(row+1<m.getRows()){
+                   // rightValid = false;
+                  //  return rightValid;
+              //  }
+                    if(m.getWalls()[dep][row+1][col+1]==0) //{
                         rightValid = false;
                     }
-                if(dep+1<m.getDepth())
-                    if(m.getWalls()[dep+1][row][col+1]==0) {
+                if(dep+1<m.getDepth()){
+                  //  rightValid = false;
+                  //  return rightValid;
+               // }
+                    if(m.getWalls()[dep+1][row][col+1]==0) //{
                         rightValid = false;
                     }
-                if(dep-1>0)
-                    if(m.getWalls()[dep-1][row][col+1]==0) {
+                if(dep-1>=0){
+                  //  rightValid = false;
+                   // return rightValid;
+              //  }
+                    if(m.getWalls()[dep-1][row][col+1]==0) //{
                         rightValid = false;
                     }
             }
@@ -194,27 +285,39 @@ public class MyMaze3DGenerator extends  AMaze3DGenerator{
                 return null;
             Stack<Position3D> k = new Stack<>();
             if (MyMaze3DGenerator.CheckUpNeighbor(m, p)) {
+                if(p.getRowIndex()-1<0)
+                    return null;
                 Position3D pos = new Position3D(p.getDepthIndex(),p.getRowIndex() - 1, p.getColumnIndex());
                 k.push(pos);
             }
             if (MyMaze3DGenerator.CheckDownNeighbor(m, p)) {
+                if(p.getRowIndex()+1>= m.getRows())
+                    return null;
                 Position3D pos = new Position3D(p.getDepthIndex(),p.getRowIndex() + 1, p.getColumnIndex());
                 k.push(pos);
             }
             if (MyMaze3DGenerator.CheckLeftNeighbor(m, p)) {
+                if(p.getColumnIndex()-1<0)
+                    return null;
                 Position3D pos = new Position3D(p.getDepthIndex(),p.getRowIndex(), p.getColumnIndex() - 1);
                 k.push(pos);
             }
             if (MyMaze3DGenerator.CheckRightNeighbor(m, p)) {
+                if(p.getColumnIndex()+1>= m.getColumns())
+                    return null;
                 Position3D pos = new Position3D(p.getDepthIndex(),p.getRowIndex(), p.getColumnIndex() + 1);
                 k.push(pos);
             }
             if (MyMaze3DGenerator.CheckInNeighbor(m, p)) {
+                if(p.getDepthIndex()+1>= m.getDepth())
+                    return null;
                 Position3D pos = new Position3D(p.getDepthIndex()+1,p.getRowIndex(), p.getColumnIndex());
                 k.push(pos);
             }
             if (MyMaze3DGenerator.CheckOutNeighbor(m, p)) {
-                Position3D pos = new Position3D(p.getDepthIndex()-1,p.getRowIndex(), p.getColumnIndex() + 1);
+                if(p.getDepthIndex()-1<0)
+                    return null;
+                Position3D pos = new Position3D(p.getDepthIndex()-1,p.getRowIndex(), p.getColumnIndex() );
                 k.push(pos);
             }
             return k;
@@ -230,7 +333,7 @@ public class MyMaze3DGenerator extends  AMaze3DGenerator{
         for (int k=0; k<depth; k++) {
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < column; j++) {
-                    map[k][i][j] = 0;
+                    map[k][i][j] = 1;
                 }
             }
         }
@@ -251,30 +354,34 @@ public class MyMaze3DGenerator extends  AMaze3DGenerator{
                 {
                     Position3D CurrNeighbor= Neighbors.pop();
                     if(i==randNeighborInd) {
-                        randNeighborPos =CurrNeighbor;
+                        randNeighborPos = CurrNeighbor;
                     }
                     else {
+                        //if((map[CurrNeighbor.getDepthIndex()][CurrNeighbor.getRowIndex()][CurrNeighbor.getColumnIndex()]==0))
+                     //       break;
                         Pathstk.push(CurrNeighbor);
                     }
                     m.setCell(CurrNeighbor.getDepthIndex(),CurrNeighbor.getRowIndex(),CurrNeighbor.getColumnIndex(),0);
                 }
+                //if((map[randNeighborPos.getDepthIndex()][randNeighborPos.getRowIndex()][randNeighborPos.getColumnIndex()]==0))
+                  //  break;
                 Pathstk.push(randNeighborPos);
             }
         }
-        int randepth=(int)Math.floor(Math.random() * depth);
+        int ranDepth=(int)Math.floor(Math.random() * depth);
         int randRow=(int)Math.floor(Math.random() * row);
         int randCol=(int)Math.floor(Math.random() * column);
         m.setEnd(null);
         while (m.getGoalPosition()==null)
         {
-            randepth=(int)Math.floor(Math.random() * depth);
+            ranDepth=(int)Math.floor(Math.random() * depth);
             randRow=(int)Math.floor(Math.random() * row);
             randCol=(int)Math.floor(Math.random() * column);
-            int halfRowsAndCols=((m.getRows()+m.getColumns())/2)-1;//for making interesting mazes
-            Position3D pos = new Position3D(randepth,randRow, randCol);
+            int halfRowsAndCols=((m.getRows()+m.getColumns()+m.getDepth())/2)-1;//for making interesting mazes
+            Position3D pos = new Position3D(ranDepth,randRow, randCol);
             if(randRow+randCol>=halfRowsAndCols)
             {
-                if(m.getWalls()[randepth][randRow][randCol]==0)
+                if(m.getWalls()[ranDepth][randRow][randCol]==0)
                     m.setEnd(pos);
             }
         }
