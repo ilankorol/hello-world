@@ -1,4 +1,4 @@
-package maze3D;
+package algorithms.maze3D;
 
 public abstract class AMaze3DGenerator implements IMaze3DGenerator {
     public abstract Maze3D generate(int depth, int row, int column);
