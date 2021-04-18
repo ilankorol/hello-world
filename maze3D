@@ -7,6 +7,7 @@ public class Maze3D {
     private int[][][] Walls;
     private Position3D start;
     private Position3D end;
+
     public void setWalls(int[][][] walls) {
         Walls = walls;
     }
@@ -45,6 +46,7 @@ public class Maze3D {
     public void setDepth(int depth) {
         this.depth = depth;
     }
+
     public int getRows() {
         return row;
     }
@@ -52,50 +54,41 @@ public class Maze3D {
     public int getColumns() {
         return column;
     }
+
     public int getDepth() {
         return depth;
     }
 
-    public void setCell(int depth,int row,int column,int val)
-    {
-        if(row>=0&column>=0&depth>=0&row<this.row&column<this.column&depth<this.depth&(val==0|val==1))
-        {
-            Walls[depth][row][column]=val;
+    public void setCell(int depth, int row, int column, int val) {
+        if (row >= 0 & column >= 0 & depth >= 0 & row < this.row & column < this.column & depth < this.depth & (val == 0 | val == 1)) {
+            Walls[depth][row][column] = val;
         }
     }
-    public void print()
-    {
-        boolean StartRedColor=false;
-        boolean EndGreenColor=false;
-        for (int i =0; i<getDepth();i++) {
-            if(i==0)
-                System.out.println("{");
-            if (i!=0)
-                System.out.println("}\n},\n{");
-            for (int currRow = 0; currRow < getRows(); currRow++) {
-                if (currRow != 0)
-                    System.out.println("},");
-                System.out.print("\t{");
-                for (int currCol = 0; currCol < getColumns(); currCol++) {
-                    StartRedColor = false;
-                    EndGreenColor = false;
-                    if (getStartPosition().getDepthIndex()==i & getStartPosition().getRowIndex() == currRow & getStartPosition().getColumnIndex() == currCol)
-                        StartRedColor = true;
-                    if (getGoalPosition().getDepthIndex()==i &getGoalPosition().getRowIndex() == currRow & getGoalPosition().getColumnIndex() == currCol)
-                        EndGreenColor = true;
-                    if (StartRedColor)
-                        System.out.print("\033[0;31m" + "S");
-                    if (EndGreenColor)
-                        System.out.print("\033[0;32m" + "E");
-                    if (!StartRedColor && !EndGreenColor)
-                        System.out.print(getWalls()[i][currRow][currCol]);
-                    if (StartRedColor || EndGreenColor)
-                        System.out.print("\033[0m");
-                    if (currCol != column - 1)
-                        System.out.print(", ");
+
+    public void print() {
+        System.out.println("{");
+        for (int depth = 0; depth < getDepth(); depth++) {
+            for (int row = 0; row < getRows(); row++) {
+                System.out.print("{ ");
+                for (int col = 0; col < getColumns(); col++) {
+                    if (depth == getStartPosition().getDepthIndex() && row == getStartPosition().getRowIndex() && col == getStartPosition().getColumnIndex()) // if the position is the start - mark with S
+                        System.out.print("S ");
+                    else {
+                        if (depth == getGoalPosition().getDepthIndex() && row == getGoalPosition().getRowIndex() && col == getGoalPosition().getColumnIndex()) // if the position is the goal - mark with E
+                            System.out.print("E ");
+                        else
+                            System.out.print(getWalls()[depth][row][col] + " ");
+                    }
                 }
+                System.out.println("}");
+            }
+            if (depth < getDepth() - 1) {
+                System.out.print("---");
+                for (int i = 0; i < getColumns(); i++)
+                    System.out.print("--");
+                System.out.println();
             }
         }
-        System.out.println("}\n}");
+        System.out.println("}");
     }
 }
