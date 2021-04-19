@@ -7,37 +7,43 @@ public class Maze {
     private Position start;
     private Position end;
 
-    public void setWalls(int[][] walls) {
-        Walls = walls;
+    public void setWalls(int[][] walls) throws Exception {
+        if(walls==null)
+            throw new Exception("Walls Are Null");
+        this.Walls = walls;
     }
 
     public int[][] getWalls() {
         return Walls;
     }
 
-    public void setStart(Position start) {
-        Start = start;
+    public void setStart(Position start) throws Exception {
+        if(start==null)
+            throw new Exception("start is null");
+        this.start = start;
     }
 
-    public void setEnd(Position end) {
-        End = end;
+    public void setEnd(Position end) throws Exception {
+        this.end = end;
     }
 
     public Position getStartPosition() {
-        return Start;
+        return start;
     }
 
     public Position getGoalPosition() {
-        return End;
+        return end;
     }
 
-    private Position Start;
-    private Position End;
-    public void setRows(int rows) {
+    public void setRows(int rows) throws Exception {
+        if(rows<2)
+            throw new Exception("Amount Of Rows Not Enough");
         this.rows = rows;
     }
 
-    public void setColumns(int columns) {
+    public void setColumns(int columns) throws Exception {
+        if(columns<2)
+            throw new Exception("Amount Of Columns Not Enough");
         this.columns = columns;
     }
 
@@ -48,12 +54,14 @@ public class Maze {
     public int getColumns() {
         return columns;
     }
-    public void setCell(int row,int column,int val)
-    {
+    public void setCell(int row,int column,int val) throws Exception {
         if(row>=0&column>=0&row<rows&column<columns&(val==0|val==1))
         {
             Walls[row][column]=val;
         }
+        else
+            throw new Exception("invalid cell or value");
+
     }
     public void print()
     {
