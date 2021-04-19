@@ -1,22 +1,20 @@
 package algorithms.search;
 
-import algorithms.mazeGenerators.Position;
+public abstract class Node {
+    private Object data;
 
-public class MazeState extends AState{
-
-    public MazeState(AState previousState, Node node, int cost) throws Exception {
-        super(previousState, node, cost);
+    public Node(Object data) throws Exception {
+        if(data==null)
+            throw new Exception("Data Is null");
+        this.data = data;
     }
 
-    @Override
-    public int compareTo(AState o) {
-        if(((Position)this.node.getData()).getRowIndex()==((Position)o.node.getData()).getRowIndex()&&
-                ((Position)this.node.getData()).getColumnIndex()==((Position)o.node.getData()).getColumnIndex())
-            return 0;
-        return -1;
+    public Object getData() {
+        return data;
     }
 
-    @Override
-    public String toString() {return node.getData().toString();}
+
+
+
 
 }
