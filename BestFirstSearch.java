@@ -5,25 +5,36 @@ import java.util.Iterator;
 
 public class BestFirstSearch extends ASearchingAlgorithm{
 
-    @Override
-    public Solution solve(ISearchable s) {
-        this.openList.add(s.getStartState());
-        AState LowestScoreState=s.getStartState();
+    protected AState FindBestState()
+    {
         AState currState;
-        int lowestScore;
-        while(!openList.isEmpty())//s.getGoalState().getPreviousState()==null
+        AState BestScoreState=openList.peek();
+        if(!openList.isEmpty()) {
+            BestScoreState = openList.peek();
+        }
+        int lowestScore=BestScoreState.cost;
+        Iterator<AState> iter=openList.iterator();
+        while(iter.hasNext())
         {
-            if(!openList.isEmpty()) {
-                LowestScoreState = openList.peek();
-            }
-            lowestScore=LowestScoreState.cost;
-            Iterator<AState> iter=openList.iterator();
-            while(iter.hasNext())
-            {
-                currState=iter.next();
-                if(currState.cost<lowestScore)
-                    LowestScoreState=currState;
-            }
+            currState=iter.next();
+            if(currState.cost<lowestScore)
+                BestScoreState=currState;
+        }
+        return BestScoreState;
+    }
+
+    protected void WhileLoop(ISearchable s,boolean CountCostOrNot) throws Exception {
+        if(s==null)
+            throw new Exception("Searchable Is null");
+        boolean condition;
+        if(CountCostOrNot==true)
+            condition=(!openList.isEmpty());
+        else
+            condition=(s.getGoalState().getPreviousState()==null);
+        AState LowestScoreState=s.getStartState();
+        while(condition)
+        {
+            LowestScoreState=FindBestState();
             if(!openList.isEmpty()) {
                 openList.remove(LowestScoreState);
             }
@@ -33,25 +44,26 @@ public class BestFirstSearch extends ASearchingAlgorithm{
             while(sIter.hasNext())
             {
                 AState currSuccessor=sIter.next();
-                if((!closedContains(currSuccessor)) && (!openContains(currSuccessor)))
+                if(!openContains(currSuccessor))
                     openList.add(currSuccessor);
             }
+            if(CountCostOrNot==true)
+                condition=(!openList.isEmpty());
+            else
+                condition=(s.getGoalState().getPreviousState()==null);
         }
+    }
+    @Override
+    public Solution solve(ISearchable s) throws Exception {
+        if(s==null)
+            throw new Exception("Searchable Is null");
+        s.getStartState().setCost(-1);
+        s.getGoalState().setCost(0);
+        this.openList.add(s.getStartState());
+        s.getGoalState().setPreviousState(null);
+        WhileLoop(s,true);
         setVisitedNodes(closedList.size());
-        ArrayList<AState> path=new ArrayList<>();
-        AState currPathState=s.getGoalState();
-        while(currPathState!=null)
-        {
-            path.add(currPathState);
-            currPathState=currPathState.getPreviousState();
-        }
-        ArrayList<AState> revPath=new ArrayList<>();
-        System.out.println(path.get(0));
-        for (int i = path.size()-2; i >= 0; i--) {
-            revPath.add(path.get(i));
-        }
-        Solution sol=new Solution(revPath);
-        return sol;
+        return SolGetter(s);
     }
 
     @Override
