@@ -2,7 +2,11 @@ package algorithms.mazeGenerators;
 
 public class SimpleMazeGenerator extends AMazeGenerator {
 
-    public Maze generate(int rows, int columns) {
+    public Maze generate(int rows, int columns) throws Exception {
+        if(rows<2)
+            throw new Exception("Not Enough Rows");
+        if(columns<2)
+            throw new Exception("Not Enough Columns");
         Maze m= EmptyMazeGenerator.generate1(rows,columns);
         int UnableToGetToCells=rows*columns;
         m.setStart(new Position(0,0));
