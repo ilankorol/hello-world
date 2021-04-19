@@ -1,17 +1,18 @@
 package algorithms.maze3D;
-import Search.AState;
-import Search.Node;
+import algorithms.search.*;
+
 
 
 public class Maze3DState extends AState {
-    public Maze3DState(AState previousState, Node node, int cost) {
+    public Maze3DState(AState previousState, Node node, int cost) throws Exception{
         super(previousState, node, cost);
     }
 
     @Override
     public int compareTo(AState o) {
-        if(((Position3D)this.getNode().getData()).getRowIndex()==((Position3D)o.getNode().getData()).getRowIndex()&&
-                ((Position3D)this.getNode().getData()).getColumnIndex()==((Position3D)o.getNode().getData()).getColumnIndex())
+        if(((Position3D)this.node.getData()).getRowIndex()==((Position3D)o.getNode().getData()).getRowIndex()&&
+                ((Position3D)this.getNode().getData()).getColumnIndex()==((Position3D)o.getNode().getData()).getColumnIndex()&&
+                ((Position3D)this.getNode().getData()).getDepthIndex()==((Position3D)o.getNode().getData()).getDepthIndex())
             return 0;
         return -1;
     }
