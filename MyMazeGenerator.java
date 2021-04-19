@@ -3,8 +3,11 @@ package algorithms.mazeGenerators;
 import java.util.Stack;
 
 public class MyMazeGenerator extends AMazeGenerator {
-    public static boolean CheckUpNeighbor(Maze m, Position p)
-    {
+    public static boolean CheckUpNeighbor(Maze m, Position p) throws Exception {
+        if(m==null)
+            throw new Exception("maze is null");
+        if(p==null)
+            throw new Exception("position is null");
         boolean upValid=false;
         int row=p.getRowIndex();
         int col=p.getColumnIndex();
@@ -25,8 +28,11 @@ public class MyMazeGenerator extends AMazeGenerator {
         }
         return upValid;
     }
-    public static boolean CheckDownNeighbor(Maze m,Position p)
-    {
+    public static boolean CheckDownNeighbor(Maze m,Position p) throws Exception {
+        if(m==null)
+            throw new Exception("maze is null");
+        if(p==null)
+            throw new Exception("position is null");
         boolean downValid=false;
         int row=p.getRowIndex();
         int col=p.getColumnIndex();
@@ -47,8 +53,11 @@ public class MyMazeGenerator extends AMazeGenerator {
         }
         return downValid;
     }
-    public static boolean CheckLeftNeighbor(Maze m,Position p)
-    {
+    public static boolean CheckLeftNeighbor(Maze m,Position p) throws Exception {
+        if(m==null)
+            throw new Exception("maze is null");
+        if(p==null)
+            throw new Exception("position is null");
         boolean leftValid=false;
         int row=p.getRowIndex();
         int col=p.getColumnIndex();
@@ -69,8 +78,11 @@ public class MyMazeGenerator extends AMazeGenerator {
         }
         return leftValid;
     }
-    public static boolean CheckRightNeighbor(Maze m,Position p)
-    {
+    public static boolean CheckRightNeighbor(Maze m,Position p) throws Exception {
+        if(m==null)
+            throw new Exception("maze is null");
+        if(p==null)
+            throw new Exception("position is null");
         boolean rightValid=false;
         int row=p.getRowIndex();
         int col=p.getColumnIndex();
@@ -91,9 +103,11 @@ public class MyMazeGenerator extends AMazeGenerator {
         }
         return rightValid;
     }
-    public static Stack<Position> GetAvailableNeighbors(Maze m, Position p) {
-        if (p == null)
-            return null;
+    public static Stack<Position> GetAvailableNeighbors(Maze m, Position p) throws Exception {
+        if(m==null)
+            throw new Exception("maze is null");
+        if(p==null)
+            throw new Exception("position is null");
         Stack<Position> k = new Stack<>();
         if (MyMazeGenerator.CheckUpNeighbor(m, p)) {
             Position pos = new Position(p.getRowIndex() - 1, p.getColumnIndex());
@@ -114,9 +128,11 @@ public class MyMazeGenerator extends AMazeGenerator {
         return k;
     }
     @Override
-    public Maze generate(int rows, int columns) {
-        if(rows<1|columns<1)
-            return null;
+    public Maze generate(int rows, int columns) throws Exception {
+        if(rows<2)
+            throw new Exception("Not Enough Rows");
+        if(columns<2)
+            throw new Exception("Not Enough Columns");
         Maze m= EmptyMazeGenerator.generate1(rows,columns);
         Stack<Position> Pathstk= new Stack<>();
         m.setStart(new Position(0,0));
