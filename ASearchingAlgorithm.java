@@ -11,8 +11,11 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm{
     protected PriorityQueue<AState> closedList;
     private int visitedNodes;
 
-    private boolean MyContains(PriorityQueue<AState> q,AState s)
-    {
+    private boolean MyContains(PriorityQueue<AState> q,AState s) throws Exception {
+        if(q==null)
+            throw new Exception("The Queue Is null");
+        if(s==null)
+            throw new Exception("The State Is null");
         AState curr;
         Iterator<AState> iter=q.iterator();
         while(iter.hasNext())
@@ -23,16 +26,15 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm{
         }
         return false;
     }
-    public boolean openContains(AState s)
-    {
+    public boolean openContains(AState s) throws Exception {
+        if(s==null)
+            throw new Exception("The State Is null");
         return MyContains(openList,s);
     }
-    public boolean closedContains(AState s)
-    {
-        return MyContains(closedList,s);
-    }
 
-    public void setVisitedNodes(int visitedNodes) {
+    public void setVisitedNodes(int visitedNodes) throws Exception {
+        if(visitedNodes<1)
+            throw new Exception("Not Enough Visited Nodes");
         this.visitedNodes = visitedNodes;
     }
 
@@ -41,9 +43,23 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm{
         closedList=new PriorityQueue<AState>();
         visitedNodes=0;
     }
-    protected AState popOpenList(){
-        visitedNodes++;
-        return openList.poll();
+    protected Solution SolGetter(ISearchable s) throws Exception {
+        if(s==null)
+            throw new Exception("Searchable Is null");
+        ArrayList<AState> path=new ArrayList<>();
+        AState currPathState=s.getGoalState();
+        while(currPathState!=null)
+        {
+            path.add(currPathState);
+            currPathState=currPathState.getPreviousState();
+        }
+        ArrayList<AState> revPath=new ArrayList<>();
+        System.out.println(path.get(0));
+        for (int i = path.size()-2; i >= 0; i--) {
+            revPath.add(path.get(i));
+        }
+        Solution sol=new Solution(revPath);
+        return sol;
     }
 
     @Override
