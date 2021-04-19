@@ -8,16 +8,16 @@ public class Position {
         return "{"+row+","+column+"}";
     }
 
-    public Position(int row, int column) {
-        if(row > -1 & column > -1) {
-            this.row = row;
-            this.column = column;
-        }
+    public Position(int row, int column) throws Exception {
+        if(row < 0)
+            throw new Exception("There's No Negative Rows");
+        if(column < 0)
+            throw new Exception("There's No Negative Columns");
+        this.row = row;
+        this.column = column;
+
     }
 
-    public void setRow(int row) {
-        this.row = row;
-    }
 
     public int getRowIndex() {
         return row;
