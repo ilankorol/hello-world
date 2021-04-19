@@ -1,20 +1,10 @@
 package algorithms.search;
 
-public abstract class Node {
-    private Object data;
+import algorithms.mazeGenerators.Position;
 
-    public Node(Object data) throws Exception {
-        if(data==null)
-            throw new Exception("Data Is null");
-        this.data = data;
+public class MazeNode extends Node{
+
+    public MazeNode(Position c) throws Exception {
+        super(c);
     }
-
-    public Object getData() {
-        return data;
-    }
-
-
-
-
-
 }
