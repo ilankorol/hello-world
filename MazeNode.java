@@ -1,8 +1,7 @@
 package algorithms.search;
 
-public class MazeNode extends Node{
-
-    public MazeNode(MazeCoordinate c) {
-        super(c);
-    }
+public interface ISearchingAlgorithm {
+    Solution solve(ISearchable s) throws Exception;
+    int getNumberOfNodesEvaluated();
+    String getName();
 }
