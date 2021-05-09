@@ -1,0 +1,73 @@
+package IO;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+
+public class SimpleDecompressorInputStream extends InputStream {
+    private InputStream in;
+
+    public SimpleDecompressorInputStream(InputStream in) {
+        this.in = in;
+    }
+
+    @Override
+    public int read() throws IOException {
+        return 0;
+    }
+
+    public int read(byte[] b) throws IOException {
+        ArrayList<Byte> mazeArray = new ArrayList<Byte>();
+        ArrayList<Byte> bb = new ArrayList<Byte>();
+        int data=0;
+        int i = 0;
+        while((data=this.in.read())!=-1){
+            bb.add((byte)data);
+            i++;
+        }
+        byte[] bb1= new byte[bb.size()];
+        for(int f=0; f<bb.size();f++){
+            bb1[f]=bb.get(f);
+        }
+        for(int a=0;a<24;a++){
+            b[a]=bb1[a];
+        }
+        int flag = 24;
+        int counter = 0;
+        for(int si=24;si<bb1.length;si++){
+            if(si%2==0){
+                for(int zeros=0; zeros<bb1[si];zeros++) {
+                    if (zeros < bb1[si] - 1) {
+                        b[zeros + flag] = (byte) 0;
+                        counter++;
+                    } else {
+                        b[zeros + flag] = (byte) 0;
+                        flag += counter+1;
+                        counter=0;
+                    }
+                }
+            }
+            else {
+                for(int ones=0;ones<bb1[si];ones++){
+                    if(bb1[si]>1) {
+                        if (ones < bb1[si] - 1) {
+                            b[ones + flag] = (byte) 1;
+                            counter++;
+                        } else {
+                            b[ones + flag] = (byte) 1;
+                            flag += counter+1;
+                            counter = 0;
+                        }
+                    }
+                    else{
+                        b[ones+flag]=(byte)1;
+                        flag++;
+                    }
+                }
+            }
+        }
+
+        in.read(b);
+        return b.length;
+    }
+    }
