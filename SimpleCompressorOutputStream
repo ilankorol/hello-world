@@ -1,0 +1,65 @@
+package IO;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+public class SimpleCompressorOutputStream extends OutputStream {
+    private OutputStream out;
+    private byte byteCount;
+    private byte lastByte;
+
+    public SimpleCompressorOutputStream(OutputStream out) {
+        this.out = out;
+    }
+
+    @Override
+    public void write(int b) throws IOException {
+
+    }
+
+    public void write(byte[] b) throws IOException {
+        ArrayList<Byte> counterArray = new ArrayList<Byte>();
+        for ( int f=0; f<24; f++){
+            counterArray.add(b[f]);
+        }
+        byte bytecounter=0;
+        int flag=0;
+        int i = 24;
+        while(i<b.length){
+            if(i==24 && b[i]==1){
+                counterArray.add((byte)(0));
+                bytecounter++;
+                flag = 1;
+                i++;
+            }
+            else if(flag == b[i]) {
+                bytecounter++;
+                i++;
+            }
+            else if(flag!=b[i]){
+                counterArray.add(bytecounter);
+                bytecounter=1;
+                if(flag == 1){
+                    flag= 0;
+                    i++;
+                }
+                else {
+                    flag = 1;
+                    i++;
+                }
+            }
+            }
+        if(flag == 0){
+            counterArray.add(bytecounter);
+            counterArray.add((byte)0);
+        }
+        if(flag==1){
+            counterArray.add(bytecounter);
+        }
+            byte[] bytearr = new byte[counterArray.size()];
+            for (int a = 0; a < counterArray.size(); a++) {
+                bytearr[a] = counterArray.get(a);
+            }
+            out.write(bytearr);
+        }
+    }
+
