@@ -1,0 +1,91 @@
+package IO;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+
+public  class MyDecompressorInputStream extends InputStream {
+    private InputStream in;
+
+    public MyDecompressorInputStream(InputStream in) {
+        this.in = in;
+    }
+
+    @Override
+    public int read() throws IOException {
+        return 0;
+    }
+
+    public int read(byte[] b) throws IOException {
+        ArrayList<Byte> mazeArray = new ArrayList<Byte>();
+        ArrayList<Byte> bb = new ArrayList<Byte>();
+        int data=0;
+        int i = 0;
+        while((data=this.in.read())!=-1){
+            bb.add((byte)data);
+            i++;
+        }
+        byte[] bb1= new byte[i];
+        for(int f=0; f<bb.size();f++){
+            bb1[f]=bb.get(f);
+        }
+        for(int a=0;a<24;a++){
+            if(bb1[a]<0){
+                int num = bb1[a] + 256;
+                mazeArray.add(a,(byte)num);
+            }
+            else {
+                mazeArray.add(a, bb1[a]);
+            }
+        }
+        int d=24;
+        int ik = b.length % 8;
+        if(b.length%8==0) {
+            for (int y = 24; y < bb1.length; y++) {
+                int num = bb1[y];
+                if (num <= 0) {
+                    num = num + 256;
+                }
+                ArrayList<Integer> tempArray = new ArrayList<Integer>();
+                for (int m = 0; m < 8; m++) {
+                    tempArray.add((num % 2));
+                    num = (num / 2);
+                }
+                for (int l = 7; l >= 0; l--) {
+                    int ilan = (int) tempArray.get(l);
+                    mazeArray.add(d++, (byte) (ilan));
+                }
+            }
+        }
+        else {
+            for (int y = 24; y < bb1.length-ik; y++) {
+                int num = bb1[y];
+                if (num <= 0) {
+                    num = num + 256;
+                }
+                ArrayList<Integer> tempArray = new ArrayList<Integer>();
+                for (int m = 0; m < 8; m++) {
+                    tempArray.add((num % 2));
+                    num = (num / 2);
+                }
+                for (int l = 7; l >= 0; l--) {
+                    int ilan = (int) tempArray.get(l);
+                    mazeArray.add(d++, (byte) (ilan));
+                }
+            }
+            for (int mn = bb1.length - ik; mn < bb1.length; mn++) {
+                mazeArray.add(bb1[mn]);
+            }
+        }
+
+
+        byte[] bytearr = new byte[mazeArray.size()];
+        for(int k = 0; k<mazeArray.size(); k++){
+            b[k] = mazeArray.get(k);
+        }
+        in.read(b);
+        return b.length;
+    }
+
+    }
+
