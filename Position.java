@@ -1,6 +1,6 @@
 package algorithms.mazeGenerators;
 
-public class Position {
+public class Position implements java.io.Serializable{
     private int row;
     private int column;
 
@@ -8,7 +8,7 @@ public class Position {
         return "{"+row+","+column+"}";
     }
 
-    public Position(int row, int column) throws Exception {
+    public Position(int row, int column) throws Exception{
         if(row < 0)
             throw new Exception("There's No Negative Rows");
         if(column < 0)
