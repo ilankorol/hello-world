@@ -47,7 +47,7 @@ public class SimpleCompressorOutputStream extends OutputStream {
                     i++;
                 }
             }
-            }
+        }
         if(flag == 0){
             counterArray.add(bytecounter);
             counterArray.add((byte)0);
@@ -55,11 +55,10 @@ public class SimpleCompressorOutputStream extends OutputStream {
         if(flag==1){
             counterArray.add(bytecounter);
         }
-            byte[] bytearr = new byte[counterArray.size()];
-            for (int a = 0; a < counterArray.size(); a++) {
-                bytearr[a] = counterArray.get(a);
-            }
-            out.write(bytearr);
+        byte[] bytearr = new byte[counterArray.size()];
+        for (int a = 0; a < counterArray.size(); a++) {
+            bytearr[a] = counterArray.get(a);
         }
+        out.write(bytearr);
     }
-
+}
