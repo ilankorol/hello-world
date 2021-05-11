@@ -2,9 +2,9 @@ package algorithms.search;
 
 import algorithms.mazeGenerators.Position;
 
-public class MazeState extends AState{
+public class MazeState extends AState implements java.io.Serializable{
 
-    public MazeState(AState previousState, Node node, int cost) {
+    public MazeState(AState previousState, Node node, int cost) throws Exception {
         super(previousState, node, cost);
     }
 
