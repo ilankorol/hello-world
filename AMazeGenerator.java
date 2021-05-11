@@ -1,6 +1,6 @@
 package algorithms.mazeGenerators;
 
-public abstract class AMazeGenerator implements IMazeGenerator {
+public abstract class AMazeGenerator implements IMazeGenerator,java.io.Serializable {
     @Override
     public long measureAlgorithmTimeMillis(int rows, int columns) throws Exception {
         if(rows<2)
