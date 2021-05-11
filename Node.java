@@ -1,10 +1,11 @@
 package algorithms.search;
 
-public abstract class Node {
+public abstract class Node implements java.io.Serializable{
     private Object data;
-    private Node next;
 
-    public Node(Object data) {
+    public Node(Object data) throws Exception {
+        if(data==null)
+            throw new Exception("Data Is null");
         this.data = data;
     }
 
@@ -12,15 +13,8 @@ public abstract class Node {
         return data;
     }
 
-    public void setData(Object data) {
-        this.data = data;
-    }
 
-    public void setNext(Node next) {
-        this.next = next;
-    }
 
-    public Node getNext() {
-        return next;
-    }
+
+
 }
