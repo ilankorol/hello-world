@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.*;
 
-public class DepthFirstSearch extends ASearchingAlgorithm{
+public class DepthFirstSearch extends ASearchingAlgorithm implements java.io.Serializable{
     @Override
     public Solution solve(ISearchable s) throws Exception {
         if (s == null)
