@@ -5,7 +5,7 @@ import algorithms.mazeGenerators.Position;
 
 import java.util.ArrayList;
 
-public class SearchableMaze implements ISearchable{
+public class SearchableMaze implements ISearchable,java.io.Serializable{
     Maze maze;
     AState start;
     AState goal;
