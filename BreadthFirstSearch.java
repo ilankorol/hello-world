@@ -2,7 +2,7 @@ package algorithms.search;
 
 import java.util.Iterator;
 
-public class BreadthFirstSearch extends BestFirstSearch{
+public class BreadthFirstSearch extends BestFirstSearch implements java.io.Serializable{
     @Override
     public Solution solve(ISearchable s) throws Exception {
         if(s==null)
