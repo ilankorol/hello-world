@@ -70,4 +70,4 @@ public class SimpleDecompressorInputStream extends InputStream {
         in.read(b);
         return b.length;
     }
-    }
+}
