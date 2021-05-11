@@ -1,7 +1,7 @@
 package IO;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
+import java.util.*;
 
 public  class MyCompressorOutputStream extends OutputStream {
     private OutputStream out;
@@ -26,16 +26,16 @@ public  class MyCompressorOutputStream extends OutputStream {
         for(int i=0;i<runable;i++){
             int k =0;
             for(int a=num;a<num+8;a++){
-               if(b[a]!=0){
-                   k+=Math.pow(2,7-(a-num));
-               }
+                if(b[a]!=0){
+                    k+=Math.pow(2,7-(a-num));
+                }
                 ind++;
-               if(ind==8){
-                   num+=ind;
-                   ind=0;
-                   counterArray.add((byte)k);
-                   break;
-               }
+                if(ind==8){
+                    num+=ind;
+                    ind=0;
+                    counterArray.add((byte)k);
+                    break;
+                }
             }
         }
         int f=(b.length)%8;
