@@ -3,7 +3,7 @@ package algorithms.search;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class BestFirstSearch extends ASearchingAlgorithm{
+public class BestFirstSearch extends ASearchingAlgorithm implements java.io.Serializable{
 
     protected AState FindBestState()
     {
