@@ -1,13 +1,6 @@
 package algorithms.mazeGenerators;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.nio.*;
-import java.util.ArrayList;
-import java.lang.Integer;
-
-
-public class Maze {
+public class Maze implements java.io.Serializable{
     private int rows;
     private int columns;
     private int[][] Walls;
@@ -17,7 +10,7 @@ public class Maze {
 
     }
 
-    public Maze(byte[] b) throws Exception {
+    public Maze(byte[] b) {
         int a=0;
         int c=0;
         int d=0;
@@ -33,66 +26,70 @@ public class Maze {
                 a+=b[i];
             }
         }
-        this.setRows(a);
-        for(int i=4;i<8;i++){
-            if(b[i]<0){
-                int lm=256+b[i];
-                c+=lm;
+        try {
+            this.setRows(a);
+            for (int i = 4; i < 8; i++) {
+                if (b[i] < 0) {
+                    int lm = 256 + b[i];
+                    c += lm;
+                } else {
+                    c += b[i];
+                }
             }
-            else{
-                c+=b[i];
+            this.setColumns(c);
+            for (int i = 8; i < 12; i++) {
+                if (b[i] < 0) {
+                    int lm = 256 + b[i];
+                    d += lm;
+                } else {
+                    d += b[i];
+                }
+            }
+            for (int i = 12; i < 16; i++) {
+                if (b[i] < 0) {
+                    int lm = 256 + b[i];
+                    e += lm;
+                } else {
+                    e += b[i];
+                }
+            }
+            int[][] walls = new int[a][c];
+            setWalls(walls);
+            Position st = new Position(d, e);
+            this.setStart(st);
+            for (int i = 16; i < 20; i++) {
+                if (b[i] < 0) {
+                    int lm = 256 + b[i];
+                    f += lm;
+                } else {
+                    f += b[i];
+                }
+            }
+            for (int i = 20; i < 24; i++) {
+                if (b[i] < 0) {
+                    int lm = 256 + b[i];
+                    g += lm;
+                } else {
+                    g += b[i];
+                }
+            }
+            Position en = new Position(f, g);
+            this.setEnd(en);
+            int k = 24;
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
+                    this.setCell(i, j, b[k]);
+                    k++;
+                }
             }
         }
-        this.setColumns(c);
-        for(int i=8;i<12;i++){
-            if(b[i]<0){
-                int lm=256+b[i];
-                d+=lm;
-            }
-            else{
-                d+=b[i];
-            }        }
-        for(int i=12;i<16;i++){
-            if(b[i]<0){
-                int lm=256+b[i];
-                e+=lm;
-            }
-            else{
-                e+=b[i];
-            }        }
-        int[][] walls = new int[a][c];
-        setWalls(walls);
-        Position st=new Position(d,e);
-        this.setStart(st);
-        for(int i=16;i<20;i++){
-            if(b[i]<0){
-                int lm=256+b[i];
-                f+=lm;
-            }
-            else{
-                f+=b[i];
-            }        }
-        for(int i=20;i<24;i++){
-            if(b[i]<0){
-                int lm=256+b[i];
-                g+=lm;
-            }
-            else{
-                g+=b[i];
-            }        }
-        Position en=new Position(f,g);
-        this.setEnd(en);
-        int k=24;
-        for(int i=0;i<rows;i++){
-            for(int j =0;j<columns;j++){
-                this.setCell(i,j,b[k]);
-                k++;
-            }
+        catch(Exception ex)
+        {
+            System.err.println(ex);
         }
     }
-
     public void setWalls(int[][] walls) throws Exception {
-        if (walls == null)
+        if(walls==null)
             throw new Exception("Walls Are Null");
         this.Walls = walls;
     }
@@ -102,7 +99,7 @@ public class Maze {
     }
 
     public void setStart(Position start) throws Exception {
-        if (start == null)
+        if(start==null)
             throw new Exception("start is null");
         this.start = start;
     }
@@ -120,13 +117,13 @@ public class Maze {
     }
 
     public void setRows(int rows) throws Exception {
-        if (rows < 2)
+        if(rows<2)
             throw new Exception("Amount Of Rows Not Enough");
         this.rows = rows;
     }
 
     public void setColumns(int columns) throws Exception {
-        if (columns < 2)
+        if(columns<2)
             throw new Exception("Amount Of Columns Not Enough");
         this.columns = columns;
     }
@@ -138,44 +135,46 @@ public class Maze {
     public int getColumns() {
         return columns;
     }
-
-    public void setCell(int row, int column, int val) throws Exception {
-        if (row >= 0 & column >= 0 & row < rows & column < columns & (val == 0 | val == 1)) {
-            Walls[row][column] = val;
-        } else
+    public void setCell(int row,int column,int val) throws Exception {
+        if(row>=0&column>=0&row<rows&column<columns&(val==0|val==1))
+        {
+            Walls[row][column]=val;
+        }
+        else
             throw new Exception("invalid cell or value");
 
     }
-
-    public void print() {
-        boolean StartRedColor = false;
-        boolean EndGreenColor = false;
-        for (int currRow = 0; currRow < getRows(); currRow++) {
-            if (currRow != 0)
+    public void print()
+    {
+        boolean StartRedColor=false;
+        boolean EndGreenColor=false;
+        for(int currRow=0;currRow<getRows();currRow++)
+        {
+            if(currRow!=0)
                 System.out.println(" }");
             System.out.print("{ ");
-            for (int currCol = 0; currCol < getColumns(); currCol++) {
-                StartRedColor = false;
-                EndGreenColor = false;
-                if (getStartPosition().getRowIndex() == currRow & getStartPosition().getColumnIndex() == currCol)
-                    StartRedColor = true;
-                if (getGoalPosition().getRowIndex() == currRow & getGoalPosition().getColumnIndex() == currCol)
-                    EndGreenColor = true;
-                if (StartRedColor)
-                    System.out.print("\033[0;31m" + "S");
-                if (EndGreenColor)
-                    System.out.print("\033[0;32m" + "E");
-                if (!StartRedColor && !EndGreenColor)
+            for (int currCol=0;currCol<getColumns();currCol++)
+            {
+                StartRedColor=false;
+                EndGreenColor=false;
+                if(getStartPosition().getRowIndex()==currRow & getStartPosition().getColumnIndex()==currCol)
+                    StartRedColor=true;
+                if(getGoalPosition().getRowIndex()==currRow & getGoalPosition().getColumnIndex()==currCol)
+                    EndGreenColor=true;
+                if(StartRedColor)
+                    System.out.print("\033[0;31m"+"S");
+                if(EndGreenColor)
+                    System.out.print("\033[0;32m"+"E");
+                if(!StartRedColor&&!EndGreenColor)
                     System.out.print(getWalls()[currRow][currCol]);
-                if (StartRedColor || EndGreenColor)
+                if(StartRedColor||EndGreenColor)
                     System.out.print("\033[0m");
-                if (currCol != columns - 1)
+                if(currCol!=columns-1)
                     System.out.print(" ");
             }
         }
         System.out.println(" }");
     }
-
     public byte[] toByteArray() {
         byte by = (byte)(this.rows/255);
         byte res= (byte)(this.rows%255);
@@ -195,7 +194,7 @@ public class Maze {
         }
         for(int y=0; y<by;y++){
             b[y]=(byte)255;
-          //  b[y+4]=(byte)255;
+            //  b[y+4]=(byte)255;
         }
         b[by]=res;
         for(int y=0; y<co;y++){
@@ -232,5 +231,5 @@ public class Maze {
         }
         return b;
 
-        }
     }
+}
